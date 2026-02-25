@@ -19,3 +19,5 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+    
+    'this file use create a models vo vala models jo api ma zahir hota ha or database ma table banta ha aur vo vala jo mvt ya mtv pattern ma show hota ha yani m models baki templates fronted ma use hota ha'
