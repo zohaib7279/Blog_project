@@ -1,17 +1,22 @@
-from rest_framework import serializers
+from rest_framework import generics, viewsets, permissions
 from django.contrib.auth.models import User
+from .models import Task
+from .serializers import RegisterSerializer, TaskSerializer
 
-class RegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True)
+# Register View
+class RegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = RegisterSerializer
+    permission_classes = []
 
-    class Meta:
-        model = User
-        fields = ['username', 'email', 'password']
 
-    def create(self, validated_data):
-        user = User.objects.create_user(
-            username=validated_data['username'],
-            email=validated_data['email'],
-            password=validated_data['password']
-        )
-        return user
+# Task ViewSet
+class TaskViewSet(viewsets.ModelViewSet):
+    serializer_class = TaskSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return Task.objects.filter(owner=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
