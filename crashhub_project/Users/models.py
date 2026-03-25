@@ -1,13 +1,17 @@
+import uuid
 from django.db import models
 
-# Create your models here.
+class Role(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=100)
+
 class User(models.Model):
-    username = models.CharField(max_length=150, unique=True)
-    full_name = models.CharField(max_length=255)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    username = models.CharField(max_length=100)
+    full_name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
-    phone_number = models.CharField(max_length=20, blank=True, null=True)
-    password = models.CharField(max_length=128)
-    role_id = models.IntegerField()
+    phone_number = models.CharField(max_length=15)
+    password = models.CharField(max_length=255)
+    role = models.ForeignKey(Role, on_delete=models.CASCADE)
     is_deleted = models.BooleanField(default=False)
-    def __str__(self):
-        return self.username
+    created_at = models.DateTimeField(auto_now_add=True)
