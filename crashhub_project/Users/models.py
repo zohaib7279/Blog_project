@@ -12,6 +12,5 @@ class User(models.Model):
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=15)
     password = models.CharField(max_length=255)
-    role = models.ForeignKey(Role, on_delete=models.CASCADE)
     is_deleted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
