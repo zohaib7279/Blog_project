@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     # tumhari APIs
-    path('api/', include('myapp.urls')),
+    path('api/', include('users.urls')),
 
     # swagger schema
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
