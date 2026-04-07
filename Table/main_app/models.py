@@ -1,3 +1,5 @@
+from operator import add
+
 from django.db import models
 
 # Create your models here.
@@ -13,7 +15,6 @@ class User(models.Model):
         return self.username    
 
 class Role(models.Model):
-    id = models.CharField(max_length=255, primary_key=True)
     name = models.CharField(max_length=255)
     Role_type = models.CharField(max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
