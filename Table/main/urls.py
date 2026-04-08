@@ -22,12 +22,13 @@ urlpatterns = [
 ]
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from main_app.views import UserViewSet, RoleViewSet
+from main_app.views import RoleViewSet, UserViewSet, LoginView
 
 router = DefaultRouter()
-router.register('users', UserViewSet)
 router.register('roles', RoleViewSet)
+router.register('users', UserViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('', include(router.urls)),   # only ViewSets here
+    path('login/', LoginView.as_view()),  # APIView separately
 ]

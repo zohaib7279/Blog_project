@@ -39,7 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main_app',
     'rest_framework',
+    'rest_framework_simplejwt',
 ]
+
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

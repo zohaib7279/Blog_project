@@ -16,7 +16,7 @@ class User(models.Model):
 
 class Role(models.Model):
     name = models.CharField(max_length=255)
-    Role_type = models.CharField(max_length=255)
+    Role_type = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
